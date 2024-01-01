@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use App\Models\Dokter;
+use App\Models\Buatjanji;
 
 class HomeController extends Controller
 {
@@ -16,7 +18,8 @@ class HomeController extends Controller
         {
             if(Auth::user()->usertype== '0')
             {
-                return view('user.home');
+                $dokter = dokter::all();
+                return view('user.home',compact('dokter'));
             }
         
 
@@ -35,7 +38,32 @@ class HomeController extends Controller
     }
 
     public function index()
+    {   
+        if(Auth::id())
+        {
+            return redirect('home');
+        }
+        else{
+        $dokter = dokter::all();
+        return view ('user.home', compact('dokter'));
+        }
+    }
+
+    public function buatjanji(Request $request)
     {
-        return view ('user.home');
+        $data = new buatjanji;
+        $data->name=$request->name;
+        $data->email=$request->email;
+        $data->date=$request->date;
+        $data->no_hp=$request->no_hp;
+        $data->pesan=$request->pesan;
+        $data->dokter=$request->dokter;
+        $data->status='In Progress';
+        if(Auth::id())
+        {
+        $data->user_id=Auth::user()->id;
+        }
+        $data->save();
+        return redirect()->back()->with('message', 'Berhasil Membuat Janji. Kami Akan Memberitahu Anda Segera');
     }
 }
