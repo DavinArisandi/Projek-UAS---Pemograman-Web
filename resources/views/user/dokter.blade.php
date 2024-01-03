@@ -9,7 +9,7 @@
             <img src="fotodokter/{{$dokters->foto}}" alt="">
             <div class="meta">
               <a href="#"><span class="mai-call"></span></a>
-              <a href="#"><span class="mai-logo-whatsapp"></span></a>
+              <a href="https://www.whatsapp.com/" target="_blank"><span class="mai-logo-whatsapp"></span></a>
             </div>
           </div>
           <div class="body">

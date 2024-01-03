@@ -21,8 +21,6 @@ class HomeController extends Controller
                 $dokter = dokter::all();
                 return view('user.home',compact('dokter'));
             }
-        
-
             else
             {
             return view('admin.home'); 
@@ -34,9 +32,7 @@ class HomeController extends Controller
             return redirect()->back();
         }
 
-
     }
-
     public function index()
     {   
         if(Auth::id())
@@ -48,7 +44,6 @@ class HomeController extends Controller
         return view ('user.home', compact('dokter'));
         }
     }
-
     public function buatjanji(Request $request)
     {
         $data = new buatjanji;
@@ -65,5 +60,53 @@ class HomeController extends Controller
         }
         $data->save();
         return redirect()->back()->with('message', 'Berhasil Membuat Janji. Kami Akan Memberitahu Anda Segera');
+    }
+    public function aboutus()
+    {
+        if(Auth::id())
+        {
+            if(Auth::user()->usertype==0)
+            {
+            $dokter = dokter::all();
+            return view ('user.about', compact('dokter'));
+            }else{
+                return redirect('login');
+            }
+        }
+    }
+    public function doctors()
+    {
+        if(Auth::id())
+        {
+            if(Auth::user()->usertype==0)
+            {
+            $dokter = dokter::all();
+            return view ('user.doctors', compact('dokter'));
+            }else{
+                return redirect('login');
+            }
+        }
+    }
+    public function myappointment()
+    {
+        if(Auth::id())
+        {
+            if(Auth::user()->usertype==0)
+            {
+            $userid=Auth::user()->id;
+            $appoint=buatjanji::where('user_id',$userid)->get();
+            return view('user.my_appointment',compact('appoint'));
+            }else{
+                return redirect()->back();
+            }
+        }else{
+            return redirect('login');
+        }
+    }
+    public function batalkan_janji($id)
+    {
+        $data=buatjanji::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 }
