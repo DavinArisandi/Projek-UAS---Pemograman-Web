@@ -8,6 +8,17 @@
             display:inline-block;
             width: 200px;
         }
+        body, .container-scroller {
+            background-color: white;
+            color: black;
+        }
+        input[type="text"],
+        input[type="number"],
+        select,
+        .btn {
+            background-color: black;
+            color: white;
+        }
     </style>
     @include('admin.css')
   </head>
@@ -46,15 +57,15 @@
                   @csrf
                   <div style="padding: 15px;">
                   <label>Nama Dokter</label>
-                  <input type="text" style="color:black;" name="name" placeholder="Tuliskan Nama Dokter" required="">
+                  <input type="text" style="color:white;" name="name" placeholder="Tuliskan Nama Dokter" required="">
                   </div>
                   <div style="padding: 15px;">
                   <label>Nomor Telepon</label>
-                  <input type="number" style="color:black;" name="no_hp" placeholder="Tuliskan Nomor Telepon" required="">
+                  <input type="number" style="color:white;" name="no_hp" placeholder="Tuliskan Nomor Telepon" required="">
                   </div>
                   <div style="padding: 15px;">
                     <label>Spesialisasi</label>
-                    <select name="spesialisasi" style="color: black; width: 200px;" required="">
+                    <select name="spesialisasi" style="color: white; background-color:black; width: 200px;" required="">
                         <option value="">--Pilih--</option>
                         <option value="Dokter Umum">Dokter Umum</option>
                         <option value="Dokter Gigi">Dokter Gigi</option>
@@ -64,14 +75,14 @@
                   </div>
                   <div style="padding: 15px;">
                     <label>Nomor Ruangan</label>
-                    <input type="number" style="color:black;" name="ruangan" placeholder="Tuliskan Nomor Ruangan" required="">
+                    <input type="number" style="color:white;" name="ruangan" placeholder="Tuliskan Nomor Ruangan" required="">
                   </div>
                   <div style="padding: 15px;">
                     <label>Foto</label>
                     <input type="file" name="foto" required="">
                   </div>
                   <div style="padding: 15px;">
-                    <input type="submit" class="btn btn-success">
+                    <input type="submit" class="btn btn-success" style="background-color:#4CAF50;">
                   </div>
                   <!-- Add this after the closing tag of the form -->
                   <div class="modal fade" id="successNotification" tabindex="-1" role="dialog" aria-labelledby="successNotificationLabel" aria-hidden="true" data-backdrop="static">

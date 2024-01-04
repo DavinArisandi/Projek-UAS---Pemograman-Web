@@ -6,14 +6,20 @@
     <!-- Required meta tags -->
     <base href="/public">
     <style type="text/css">
-        label {
-            display: inline-block;
+        label
+        {
+            display:inline-block;
             width: 200px;
         }
-
-        h2 {
-            margin-top: 20px;
-            font-size: 24px;
+        body, .container-scroller {
+            background-color: white;
+            color: black;
+        }
+        input[type="text"],
+        input[type="number"],
+        .btn {
+            background-color: black;
+            color: white;
         }
     </style>
     @include('admin.css')
@@ -54,19 +60,19 @@
                         <div class="col-md-6">
                             <div class="form-group" style="display: flex; align-items: center;">
                                 <label style="width: 150px; margin-right: 20px;">Nama Dokter</label>
-                                <input type="text" style="color:black;" class="form-control" name="name" value="{{ $data->name }}">
+                                <input type="text" style="color:white;" class="form-control" name="name" value="{{ $data->name }}">
                             </div>
                             <div class="form-group" style="display: flex; align-items: center;">
                                 <label style="width: 150px; margin-right: 20px;">Nomor Telepon</label>
-                                <input type="text" style="color:black;" class="form-control" name="no_hp" value="{{ $data->no_hp }}">
+                                <input type="text" style="color:white;" class="form-control" name="no_hp" value="{{ $data->no_hp }}">
                             </div>
                             <div class="form-group" style="display: flex; align-items: center;">
                                 <label style="width: 150px; margin-right: 20px;">Spesialisasi</label>
-                                <input type="text" style="color:black;" class="form-control" name="spesialisasi" value="{{ $data->spesialisasi }}">
+                                <input type="text" style="color:white;" class="form-control" name="spesialisasi" value="{{ $data->spesialisasi }}">
                             </div>
                             <div class="form-group" style="display: flex; align-items: center;">
                                 <label style="width: 150px; margin-right: 20px;">Ruangan</label>
-                                <input type="text" style="color:black;" class="form-control" name="ruangan" value="{{ $data->ruangan }}">
+                                <input type="text" style="color:white;" class="form-control" name="ruangan" value="{{ $data->ruangan }}">
                             </div>
                         </div>
                         <div class="col-md-6 offset-md-3">
@@ -76,12 +82,12 @@
                             </div>
                             <div class="form-group text-center">
                                 <label>Ganti Foto</label>
-                                <input type="file" class="form-control" name="foto">
+                                <input style="color:black;" type="file" class="form-control" name="foto">
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="button" class="btn btn-primary" onclick="confirmUpdate()" value="Update">
+                        <input type="button" class="btn btn-success" style="background-color:#4CAF50;" onclick="confirmUpdate()" value="Update">
                     </div>
                 </form>
             </div>
@@ -93,14 +99,14 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Update</h5>
+                    <h5 class="modal-title" id="confirmationModalLabel" style="color:white;">Konfirmasi Update</h5>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="color:white">
                     Apakah Anda yakin ingin update data ini?
                 </div>
                 <div class="modal-footer">
                     <button style="color:white;" type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelAction()">Batal</button>
-                    <button type="button" class="btn btn-primary" onclick="submitUpdateForm()">Ya, Update</button>
+                    <button type="button" class="btn btn-success" style="background-color:#4CAF50;" onclick="submitUpdateForm()">Ya, Update</button>
                 </div>
             </div>
         </div>
@@ -110,7 +116,7 @@
     <div class="modal fade" id="successNotificationModal" tabindex="-1" role="dialog" aria-labelledby="successNotificationModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-body">
+                <div class="modal-body" style="color:white;">
                     &#10004; Data berhasil diupdate!
                 </div>
             </div>

@@ -29,7 +29,7 @@
             <textarea name="pesan" id="message" class="form-control" rows="6" placeholder="Enter message.."></textarea>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-3 wow zoomIn">Submit Request</button>
+        <button type="submit" style="background-color:#87CEEB;" class="btn btn-primary mt-3 wow zoomIn">Submit Request</button>
       </form>
     </div>
   </div> <!-- .page-section -->
