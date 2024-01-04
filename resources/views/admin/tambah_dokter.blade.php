@@ -42,15 +42,7 @@
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
               <div class="container" align="center" style="padding-top: 100px;">
-              @if(session()->has('message'))
-                <div class="alert alert-success">
-                  <button type="button" class="close" data-dismiss="alert">
-                    x
-                  </button>
-                  {{session()->get('message')}}
-                </div>
-                @endif
-              <form action="{{url('upload_dokter')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{url('upload_dokter')}}" method="POST" enctype="multipart/form-data" onsubmit="showSuccessNotification()">
                   @csrf
                   <div style="padding: 15px;">
                   <label>Nama Dokter</label>
@@ -80,6 +72,16 @@
                   </div>
                   <div style="padding: 15px;">
                     <input type="submit" class="btn btn-success">
+                  </div>
+                  <!-- Add this after the closing tag of the form -->
+                  <div class="modal fade" id="successNotification" tabindex="-1" role="dialog" aria-labelledby="successNotificationLabel" aria-hidden="true" data-backdrop="static">
+                      <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                              <div class="modal-body" id="successMessage" style="color: white;">
+                                  &#10004; Berhasil Menambahkan Dokter
+                              </div>
+                          </div>
+                      </div>
                   </div>
               </form>
           </div>

@@ -1,75 +1,105 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     @include('admin.css')
-  </head>
-  <body>
+</head>
+<body style="background-color: white;">
     <div class="container-scroller">
-      <div class="row p-0 m-0 proBanner" id="proBanner">
-        <div class="col-md-12 p-0 m-0">
-          <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-            <div class="ps-lg-1">
-              <div class="d-flex align-items-center justify-content-between">
-                <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-                <a href="https://www.bootstrapdash.com/product/corona-free/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
-              </div>
+        <div class="row p-0 m-0 proBanner" id="proBanner">
+            <div class="col-md-12 p-0 m-0">
+                <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
+                    <div class="ps-lg-1">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
+                            <a href="https://www.bootstrapdash.com/product/corona-free/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <a href="https://www.bootstrapdash.com/product/corona-free/"><i class="mdi mdi-home me-3 text-white"></i></a>
+                        <button id="bannerClose" class="btn border-0 p-0">
+                            <i class="mdi mdi-close text-white me-0"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="d-flex align-items-center justify-content-between">
-              <a href="https://www.bootstrapdash.com/product/corona-free/"><i class="mdi mdi-home me-3 text-white"></i></a>
-              <button id="bannerClose" class="btn border-0 p-0">
-                <i class="mdi mdi-close text-white me-0"></i>
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
-      <!-- partial:partials/_sidebar.html -->
-      
-       @include('admin.sidebar')
 
-      <!-- partial -->
-      
-       @include('admin.navbar')
+        <!-- Sidebar -->
+        @include('admin.sidebar')
+        <!-- Navbar -->
+        @include('admin.navbar')
 
-        <!-- partial -->
+        <!-- Main Content -->
         <div class="container-fluid page-body-wrapper">
-            <div align="center" style="padding-top:100px;">
-                <table>
-                    <tr style="background-color:blue;">
-                        <th style="padding:10px">Nama Dokter</th>
-                        <th style="padding:10px">Nomor Telepon</th>
-                        <th style="padding:10px">Spesialisasi</th>
-                        <th style="padding:10px">Ruangan</th>
-                        <th style="padding:10px">Foto</th>
-                        <th style="padding:10px">Delete</th>
-                        <th style="padding:10px">Update</th>
+            <div class="mt-5">
+                <table class="table table-striped table-bordered text-white" style="margin-top: 20px;">
+                    <thead class="thead-dark">
+                    <tr style="background-color: #333;">
+                        <th style="padding: 20px; color: white;">Nama Dokter</th>
+                        <th style="padding: 20px; color: white;">Nomor Telepon</th>
+                        <th style="padding: 20px; color: white;">Spesialisasi</th>
+                        <th style="padding: 20px; color: white;">Ruangan</th>
+                        <th style="padding: 20px; color: white;">Foto</th>
+                        <th style="padding: 20px; color: white;">Delete</th>
+                        <th style="padding: 20px; color: white;">Update</th>
                     </tr>
-                    @foreach ($data as $dokter)
-                    <tr align="center">
-                        <td>{{$dokter->name}}</td>
-                        <td>{{$dokter->no_hp}}</td>
-                        <td>{{$dokter->spesialisasi}}</td>
-                        <td>{{$dokter->ruangan}}</td>
-                        <td><img height="100" width="100" src="fotodokter/{{$dokter->foto}}"></td>
-                        <td>
-                            <a onclick="return confirm ('Apakah Anda Yakin Ingin Menghapus Data Dokter Ini?')" class="btn btn-danger" href="{{url('delete_dokter',$dokter->id)}}">Delete</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-primary" href="{{url('update_dokter',$dokter->id)}}">Update</a>
-                        </td>
-                    </tr>
-                    @endforeach
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $dokter)
+                        <tr>
+                            <td style="color: black; padding: 20px;">{{$dokter->name}}</td>
+                            <td style="color: black; padding: 20px;">{{$dokter->no_hp}}</td>
+                            <td style="color: black; padding: 20px;">{{$dokter->spesialisasi}}</td>
+                            <td style="color: black; padding: 20px;">{{$dokter->ruangan}}</td>
+                            <td style="padding: 30px;"><img class="img-fluid" style="width: 100px; height: 100px; border-radius: 0;" src="fotodokter/{{$dokter->foto}}" alt="{{$dokter->name}}"></td>
+                            <td style="padding: 20px;">
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal{{$dokter->id}}">Delete</button>
+                            </td>
+                            <td style="padding: 20px;">
+                                <a class="btn btn-primary" href="{{url('update_dokter',$dokter->id)}}">Update</a>
+                            </td>
+                        </tr>
+                        
+                        <!-- Modal for Delete Confirmation -->
+                        <div class="modal fade" id="deleteConfirmationModal{{$dokter->id}}" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel{{$dokter->id}}" aria-hidden="true" data-backdrop="static">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteConfirmationModalLabel{{$dokter->id}}">Konfirmasi Hapus</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Apakah Anda yakin ingin menghapus data dokter ini?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button style="color:white;" type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                        <a href="{{url('delete_dokter',$dokter->id)}}" class="btn btn-danger"  onclick="performAction()">Ya, Hapus</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
-        
+    </div>
 
-    <!-- container-scroller -->
-    <!-- plugins:js -->
+    <div class="modal fade" id="successNotification" tabindex="-1" role="dialog" aria-labelledby="successNotificationLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body" id="successMessage" style="color: white;">
+                    &#10004; Tindakan berhasil dilakukan!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     @include('admin.script')
     <!-- End custom js for this page -->
-  </body>
+</body>
 </html>
